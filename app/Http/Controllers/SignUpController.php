@@ -90,7 +90,7 @@ class SignUpController extends Controller
 		$now = Carbon::now();
 		$newSignUpEventArray=array(
 						'email'=>$request->input('email'),
-						'email_otp'=>rand(1000,9999),
+						'email_otp'=>rand(100000,999999),
 						'email_otp_count'=>1,
 						'email_otp_start_at'=>$now
 						);
@@ -100,7 +100,7 @@ class SignUpController extends Controller
 						'phone_code'=>$request->input('phone_code'),
 						'phone_otp_count'=>1,
 						'phone_otp_start_at'=>$now,
-						'phone_otp'=>rand(1000,9999),
+						'phone_otp'=>rand(100000,999999),
 						));
 		}
 		$updateStatus = SignUp::where('ticket', $request->input('ticket'))->update($newSignUpEventArray);
@@ -218,7 +218,7 @@ class SignUpController extends Controller
 		
 		
 		if($askEmail&&($emailOtpPast>$timeLimit)){
-			$signUpEvent->email_otp=rand(1000,9999);
+			$signUpEvent->email_otp=rand(100000,999999);
 			send_otp_email($signUpEvent->email, $signUpEvent->email_otp);
 			
 			$now = Carbon::now();
@@ -227,7 +227,7 @@ class SignUpController extends Controller
 		}
 		
 		if($askPhone&&($phoneOtpPast>$timeLimit)){
-			$signUpEvent->phone_otp=rand(1000,9999);
+			$signUpEvent->phone_otp=rand(100000,999999);
 			send_otp_phone($signUpEvent->phone_code . $signUpEvent->phone, $signUpEvent->phone_otp);
 			
 			$now = Carbon::now();
@@ -258,8 +258,8 @@ class SignUpController extends Controller
             'email' => 'required|email',
             'phone' => 'nullable|string|min:5',
             'phone_code' => 'nullable|string|max:6',
-			'phone_otp'=>'nullable|numeric|min:1000|max:9999',
-			'email_otp'=>'required|numeric|min:1000|max:9999'
+			'phone_otp'=>'nullable|numeric|min:100000|max:999999',
+			'email_otp'=>'required|numeric|min:100000|max:999999'
         ]);
 		if($validator->fails()){
 			return response()->json(['error'=>array('validation' => $validator->errors()->all())],400);

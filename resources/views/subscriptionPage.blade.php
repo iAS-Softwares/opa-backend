@@ -50,7 +50,7 @@
 		<div class="col-12 col-md-6 align-self-center text-center text-md-left pb-5 pb-md-0">
 		<img style="padding-left:4px;" src="{{asset('icon.png')}}">
       <h1 class="mt-1 large-text">OPA</h1>
-      <h2>We're busy shoping, will be back soon!</h2>
+      <h2>Brought to you by, 14309901 Canada Inc.</h2>
 	  <?php $k='
       <div class="countdown d-flex justify-content-center" data-count="2023/12/3">
         <div>

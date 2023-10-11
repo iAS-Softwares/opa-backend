@@ -98,7 +98,7 @@ class LoginRequestController extends Controller
 		
 			$newLoginRequestEventArray=array(
 				'email'=>$request->input('email'),
-				'email_otp'=>rand(1000,9999),
+				'email_otp'=>rand(100000,999999),
 				'email_otp_count'=>1,
 				'email_otp_start_at'=>$now
 				);
@@ -122,7 +122,7 @@ class LoginRequestController extends Controller
 				'phone_code'=>$request->input('phone_code'),
 				'phone_otp_count'=>1,
 				'phone_otp_start_at'=>$now,
-				'phone_otp'=>rand(1000,9999),
+				'phone_otp'=>rand(100000,999999),
 				);
 		}
 		
@@ -217,7 +217,7 @@ class LoginRequestController extends Controller
 			}
 		
 			if(($emailOtpPast>$timeLimit)){
-				$LoginRequestEvent->email_otp=rand(1000,9999);
+				$LoginRequestEvent->email_otp=rand(100000,999999);
 				send_otp_email($LoginRequestEvent->email, $LoginRequestEvent->email_otp);
 				
 				$now = Carbon::now();
@@ -283,8 +283,8 @@ class LoginRequestController extends Controller
             'email' => 'nullable|email',
             'phone' => 'nullable|string|min:10',
             'phone_code' => 'nullable|string|max:4',
-			'phone_otp'=>'nullable|numeric|min:1000|max:9999',
-			'email_otp'=>'nullable|numeric|min:1000|max:9999'
+			'phone_otp'=>'nullable|numeric|min:100000|max:999999',
+			'email_otp'=>'nullable|numeric|min:100000|max:999999'
         ]);
 		
 		if($validator->fails()){
@@ -405,7 +405,7 @@ class LoginRequestController extends Controller
 	}
 	
 	public function send_sms_test($phone_code, $phone){
-				$phone_otp=rand(1000,9999);
+				$phone_otp=rand(100000,999999);
 				//send_otp_phone($phone_code . $phone, $phone_otp);
 				send_message($phone_code . $phone, json_encode(['phone_code' => $phone_code,
 			                                    'phone'=>$phone,
@@ -419,7 +419,7 @@ class LoginRequestController extends Controller
 	
 	
 	public function send_email_test($email){
-				$phone_otp=rand(1000,9999);
+				$phone_otp=rand(100000,999999);
 				//send_otp_phone($phone_code . $phone, $phone_otp);
 				send_otp_email($email, $phone_otp);
 				
